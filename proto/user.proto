@@ -1,0 +1,45 @@
+syntax = "proto3";
+option go_package = "./warehousepb";
+
+import "models.proto";
+
+// Реквест к пользовательскому микросервису на создание пользователя
+message CreateUserRequest {
+  string username = 1;
+  string firstname = 2;
+  string lastname = 3;
+  string hash = 4;
+  string email = 5;
+}
+// Реквест на получение пользователя по почте
+message GetUserByEmailRequest {
+  string email = 1;
+}
+// Реквест на получение пользователя по логину
+message GetUserByLoginRequest {
+  string username = 1;
+}
+// Реквест на получение пользователя по айди
+message GetUserByIdRequest {
+  string id = 1;
+}
+// Реквест на сброс пароля
+message ResetPasswordRequest {
+  string user_id = 1;
+  string password = 2;
+}
+
+// ---------- Update user status ----------
+message UpdateVerificationStatusRequest {
+  string user_id = 1;
+  string email = 2;
+}
+
+service UserService {
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (User);
+  rpc GetUserByLogin(GetUserByLoginRequest) returns (User);
+  rpc GetUserById(GetUserByIdRequest) returns (User);
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc ResetPassword(ResetPasswordRequest) returns (SuccessResponse);
+  rpc UpdateVerificationStatus(UpdateVerificationStatusRequest) returns (SuccessResponse);
+}
