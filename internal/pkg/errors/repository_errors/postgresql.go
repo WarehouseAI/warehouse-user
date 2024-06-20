@@ -14,5 +14,7 @@ var (
 	PostgresqlRowsCloseRaw       = errors.New("postgresql rows close error")
 	PostgresqlNoRowsWereAffected = errors.New("no rows were affected")
 
+	PostgresqlNotFound = errors.New("row not found")
+
 	PgTx = errors.New("postgresql transaction error") // PostgresqlTransaction
 )

@@ -60,6 +60,10 @@ func (r *repositoryPG) GetByUsername(
 		return models.User{}, err
 	}
 
+	if len(list) == 0 {
+		return models.User{}, repository_errors.PostgresqlNotFound
+	}
+
 	return list[0], nil
 }
 
@@ -74,6 +78,10 @@ func (r *repositoryPG) GetById(
 		return models.User{}, err
 	}
 
+	if len(list) == 0 {
+		return models.User{}, repository_errors.PostgresqlNotFound
+	}
+
 	return list[0], nil
 }
 
@@ -86,6 +94,10 @@ func (r *repositoryPG) GetByEmail(
 	list, err := r.getUserByCondition(ctx, tx.Txm(), cond, email)
 	if err != nil {
 		return models.User{}, err
+	}
+
+	if len(list) == 0 {
+		return models.User{}, repository_errors.PostgresqlNotFound
 	}
 
 	return list[0], nil

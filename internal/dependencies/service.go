@@ -9,8 +9,8 @@ func (d *dependencies) UserService() user.Service {
 		d.userService = user.NewService(
 			*d.cfg,
 			d.log,
-			d.pgxTransactionRepo,
-			d.userRepo,
+			d.PgxTransactionRepo(),
+			d.UserRepo(),
 		)
 	}
 
